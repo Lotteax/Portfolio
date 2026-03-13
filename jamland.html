@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ✏️ Change this to your project name -->
+    <title>Project Naam — Lotte Aarts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ============================================
+       SAME COLORS AS PORTFOLIO — don't change
+       ============================================ */
+        :root {
+            --rose: #D9A7B2;
+            --blush: #FFF0F3;
+            --grey: #757575;
+            --white: #FFFFFF;
+            --dark: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--blush);
+            color: var(--dark);
+        }
+
+        /* ============================================
+       NAVIGATION (terug-knop)
+       ============================================ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(255, 240, 243, 0.88);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(217, 167, 178, 0.3);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--rose);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: var(--grey);
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            transition: color 0.2s, gap 0.2s;
+        }
+
+        .back-btn:hover {
+            color: var(--rose);
+            gap: 0.7rem;
+        }
+
+        .back-btn .arrow {
+            font-size: 1rem;
+        }
+
+        /* ============================================
+       HERO BANNER
+       ============================================ */
+        .project-hero {
+            margin-top: 64px;
+            /* nav height */
+            padding: 5rem 5% 3.5rem;
+            background: var(--white);
+            border-bottom: 1px solid rgba(217, 167, 178, 0.2);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .project-hero-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .project-category-tag {
+            display: inline-block;
+            background: var(--blush);
+            color: var(--rose);
+            border: 1px solid rgba(217, 167, 178, 0.5);
+            font-size: 0.73rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 1.2rem;
+        }
+
+        .project-hero h1 em {
+            font-style: italic;
+            color: var(--rose);
+        }
+
+        .project-intro {
+            font-size: 1.05rem;
+            color: var(--grey);
+            line-height: 1.75;
+            max-width: 640px;
+            margin-bottom: 2rem;
+        }
+
+        /* Meta row: year, role, tools */
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(217, 167, 178, 0.25);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .meta-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--rose);
+            font-weight: 500;
+        }
+
+        .meta-value {
+            font-size: 0.92rem;
+            color: var(--dark);
+            font-weight: 400;
+        }
+
+        /* ============================================
+       MAIN CONTENT AREA
+       ============================================ */
+        .project-content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        /* ---- Section headings inside the project ---- */
+        .project-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            color: var(--dark);
+            margin-bottom: 1rem;
+            margin-top: 3rem;
+        }
+
+        .project-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .project-content p {
+            color: var(--grey);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1.1rem;
+        }
+
+        /* ============================================
+       IMAGE LAYOUTS
+       ============================================ */
+
+        /* Full-width single image */
+        .img-full {
+            width: 100%;
+            border-radius: 1.2rem;
+            display: block;
+            object-fit: cover;
+            margin: 2rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Placeholder for images you haven't added yet */
+        .img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--blush) 0%, rgba(217, 167, 178, 0.25) 100%);
+            border-radius: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            border: 2px dashed rgba(217, 167, 178, 0.5);
+            margin: 2rem 0;
+        }
+
+        /* Two images side by side */
+        .img-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .img-row img,
+        .img-row .img-placeholder {
+            margin: 0;
+            aspect-ratio: 4/3;
+        }
+
+        /* Three images in a row */
+        .img-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .img-row-3 img,
+        .img-row-3 .img-placeholder {
+            margin: 0;
+            aspect-ratio: 1/1;
+        }
+
+        /* Image caption */
+        .img-caption {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--rose);
+            font-style: italic;
+            margin-top: -1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ============================================
+       HIGHLIGHT QUOTE BLOCK
+       ============================================ */
+        .highlight-block {
+            background: var(--white);
+            border-left: 3px solid var(--rose);
+            border-radius: 0 1rem 1rem 0;
+            padding: 1.4rem 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-block p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* ============================================
+       TAGS ROW (tools / skills used)
+       ============================================ */
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .tag {
+            background: var(--blush);
+            color: var(--dark);
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            border: 1px solid rgba(217, 167, 178, 0.4);
+        }
+
+        /* ============================================
+       NAVIGATION BETWEEN PROJECTS (bottom)
+       ============================================ */
+        .project-nav {
+            background: var(--white);
+            border-top: 1px solid rgba(217, 167, 178, 0.2);
+            padding: 2.5rem 5%;
+        }
+
+        .project-nav-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .project-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--grey);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .project-nav a:hover {
+            color: var(--rose);
+        }
+
+        .project-nav .back-home {
+            background: var(--rose);
+            color: var(--white);
+            padding: 0.7rem 1.6rem;
+            border-radius: 999px;
+            box-shadow: 0 4px 18px rgba(217, 167, 178, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-nav .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 167, 178, 0.5);
+            color: var(--white);
+        }
+
+        /* ============================================
+       FOOTER
+       ============================================ */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            text-align: center;
+            padding: 1.5rem 5%;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.8rem;
+        }
+
+        /* ============================================
+       ANIMATIONS
+       ============================================ */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-content {
+            animation: fadeUp 0.8s 0.1s ease both;
+        }
+
+        /* ============================================
+       RESPONSIVE
+       ============================================ */
+        @media (max-width: 640px) {
+            .img-row {
+                grid-template-columns: 1fr;
+            }
+
+            .img-row-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .project-meta {
+                gap: 1.2rem;
+            }
+
+            .project-nav-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+    <nav>
+        <!-- ✏️ Keep this as your name/logo -->
+        <a href="index.html" class="nav-logo">Lotte Aarts</a>
+        <a href="index.html" class="back-btn">
+            <span class="arrow">←</span> Terug naar portfolio
+        </a>
+    </nav>
+
+
+    <!-- ============================================
+       PROJECT HERO
+       ✏️ Fill in your project details below
+       ============================================ -->
+    <header class="project-hero">
+        <div class="project-hero-inner">
+
+            <!-- ✏️ Change to your project's category -->
+            <span class="project-category-tag">Media Design 2</span>
+
+            <!-- ✏️ Change to your project title. Wrap a word in <em>...</em> for italic accent -->
+            <h1> <em>JamLand</em></h1>
+
+            <!-- ✏️ Write a short intro sentence (1–2 sentences) about the project -->
+            <p class="project-intro">
+                Jamland is een evenement waar mensen heen kunnen om muziek te maken. Dit evenement heb ik zelf verzonnen
+                en ik heb er een identiteit bij gemaakt. De opdracht was namelijk om een identiteit voor een zelf
+                verzonnen evenement te ontwerpen.
+            </p>
+
+            <!-- ✏️ Fill in the meta info below -->
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Jaar</span>
+                    <!-- ✏️ Change year -->
+                    <span class="meta-value">2025</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Mijn rol</span>
+                    <!-- ✏️ Change your role -->
+                    <span class="meta-value">Ontwerper</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tools</span>
+                    <!-- ✏️ Change tools -->
+                    <span class="meta-value">Adobe Indesign, Illustrator en Photoshop</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Opdrachtgever</span>
+                    <!-- ✏️ Change or remove this meta block if not applicable -->
+                    <span class="meta-value">Docententeam Media Design 2</span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ============================================
+       PROJECT CONTENT
+       ✏️ Replace everything in this section
+          with your own text and images
+       ============================================ -->
+    <main class="project-content">
+
+        <!-- ---- FULL-WIDTH HERO IMAGE ---- -->
+        <!--
+      ✏️ OPTION A — real image:
+         <img class="img-full" src="your-image.jpg" alt="Omschrijving">
+
+      ✏️ OPTION B — placeholder (shown by default):
+    -->
+        <img class="img-full" src="img/Mockup Flyer goede.png" alt="Omschrijving">
+
+
+
+        <!-- ---- SECTION: CONTEXT ---- -->
+        <h2>De opdracht</h2>
+        <p>
+            Voor het vak Media Design 2 kregen we de opdracht om een visuele identiteit te ontwerpen voor een zelf
+            verzonnen evenement. Ik bedacht JamLand — een evenement waar mensen van alle leeftijden samenkomen om muziek
+            te maken. Geen podium, geen publiek, gewoon mensen die samen spelen, improviseren en verbinding vinden in
+            geluid.
+        </p>
+        <p>
+            Het idee achter JamLand is dat muziek mensen bij elkaar brengt, ongeacht achtergrond of leeftijd. Of je nu
+            gitaar speelt, piano, of gewoon wil meeklappen — iedereen is welkom. Vanuit dat idee heb ik een identiteit
+            opgebouwd die dat gevoel van openheid en verbinding weerspiegelt.
+        </p>
+
+        <div class="highlight-block">
+            <p>"Ontwerp een identiteit voor een zelf verzonnen evenement"</p>
+        </div>
+
+
+        <!-- ---- SECTION: PROCESS ---- -->
+        <h2>Mijn ontwerpkeuzes</h2>
+
+        <p>
+            Het proces begon met schetsen. Door te schetsen kreeg ik steeds meer een beeld van welke richting ik op
+            wilde, en zo ontstond uiteindelijk het idee voor JamLand. Vanuit dat idee heb ik bewuste keuzes gemaakt op
+            het gebied van typografie, kleur, beeld en compositie.
+        </p>
+
+        <h2>Typografie</h2>
+        <p>
+            Voor de titels koos ik een speels en organisch lettertype, gecombineerd met een rustiger lettertype voor de
+            overige teksten. Dit contrast zorgt ervoor dat de identiteit mensen van verschillende leeftijden aanspreekt.
+        </p>
+
+        <h2>Kleur</h2>
+        <p>
+            De kleuren staan ver van elkaar af in het kleurenwiel, maar komen toch harmonieus samen — net als de
+            verschillende mensen die JamLand samenbrengt. De rustige tinten sluiten aan bij het gevoel van kalmte dat
+            muziek oproept.
+        </p>
+
+        <h2>Beeld</h2>
+        <p>
+            Instrumenten zijn het centrale beeldmotief, zodat meteen duidelijk is waar het evenement over gaat. De dunne
+            lijnstijl zorgt ervoor dat ze licht ogen en goed werken in verschillende kleuren.
+        </p>
+
+        <h2>Compositie</h2>
+        <p>
+            Driehoeken komen steeds terug als compositie-element — een vorm die staat voor verbinding. Verder heb ik
+            gelet op evenredige lijnen en een strakke opbouw.
+        </p>
+
+        <div class="tag-row">
+            <span class="tag">Typografie</span>
+            <span class="tag">Kleurtheorie</span>
+            <span class="tag">Illustratie</span>
+            <span class="tag">Compositie</span>
+            <span class="tag">Merkidentiteit</span>
+        </div>
+
+        <div class="img-row">
+            <img class="img-full" src="img/Schetsen Hiërarchie-2.png" alt="Schetsen">
+            <img class="img-full" src="img/ideeën hierarchie.png" alt="Schetsen">
+
+        </div>
+        <p class="img-caption">Onderdelen van het ontwerpproces</p>
+
+
+        <!-- ---- SECTION: RESULT ---- -->
+        <h2>Het resultaat</h2>
+        <p>
+            Het eindresultaat is een complete visuele identiteit voor JamLand, bestaande uit een flyer en bijbehorende
+            ontwerpmaterialen. De identiteit combineert speelse typografie, rustige kleuren en instrumentillustraties
+            met een heldere compositie — samen vertellen ze het verhaal van een evenement dat mensen verbindt door
+            muziek.
+        </p>
+        <img class="img-full" src="img/Mockup Flyer goede.png" alt="Schetsen">
+
+        <div class="img-row-3">
+            <img class="img-full" src="img/Tshirt mockup.png" alt="Schetsen">
+            <img class="img-full" src="img/Instagram story.png" alt="Schetsen">
+            <img class="img-full" src="img/Flyer achterkant.png" alt="Schetsen">
+
+        </div>
+
+
+        <!-- ---- SECTION: REFLECTION ---- -->
+
+    </main>
+
+
+    <!-- ============================================
+       BOTTOM NAVIGATION
+       ============================================ -->
+    <div class="project-nav">
+        <div class="project-nav-inner">
+
+            <!-- ✏️ OPTION: link to previous project.
+           Delete this line if there is no previous project. -->
+            <a href="dagplanner.html">← Vorig project</a>
+
+            <!-- Back to portfolio button — keep this -->
+            <a href="index.html" class="back-home">← Terug naar portfolio</a>
+
+            <a href="tranqcasa.html">Volgend project →</a>
+
+        </div>
+    </div>
+
+
+    <!-- ============================================
+       FOOTER
+       ============================================ -->
+    <footer>
+        © 2026 Lotte Aarts
+    </footer>
+
+</body>
+
+</html>

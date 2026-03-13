@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lottea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ============================================
+       COLOR VARIABLES — change these if you want
+       ============================================ */
+    :root {
+      --rose: #D9A7B2;
+      --blush: #FFF0F3;
+      --grey: #757575;
+      --white: #FFFFFF;
+      --dark: #2a2a2a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--blush);
+      color: var(--dark);
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(255, 240, 243, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(217, 167, 178, 0.3);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--rose);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--grey);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--rose);
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-blob {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(217, 167, 178, 0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      right: -100px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--rose);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    /* ✏️ REPLACE with your name and role above */
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--rose);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(217, 167, 178, 0.4);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(217, 167, 178, 0.55);
+    }
+
+    /* ============================================
+       ABOUT SECTION
+       ============================================ */
+    #about {
+      background: var(--white);
+      padding: 6rem 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 2rem;
+      color: var(--dark);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-image-box {
+      position: relative;
+    }
+
+    .about-image-box img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 1.5rem;
+      display: block;
+    }
+
+    /* ✏️ REPLACE "your-photo.jpg" with the path to your photo */
+    /* Place your photo in the same folder as this file         */
+
+    .about-image-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, var(--blush) 0%, rgba(217, 167, 178, 0.2) 100%);
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose);
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      border: 2px dashed var(--rose);
+    }
+
+    .about-text p {
+      color: var(--grey);
+      line-height: 1.8;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ✏️ REPLACE the paragraph text in the About section with your own bio */
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-tag {
+      background: var(--blush);
+      color: var(--dark);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      border: 1px solid rgba(217, 167, 178, 0.4);
+    }
+
+    /* ✏️ REPLACE the skill tags with your own skills */
+
+    /* ============================================
+       PROJECTS SECTION
+       ============================================ */
+    #projects {
+      padding: 6rem 5%;
+      background: var(--blush);
+    }
+
+    .projects-header {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background: var(--white);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(217, 167, 178, 0.25);
+    }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, var(--blush), rgba(217, 167, 178, 0.25));
+    }
+
+    .project-image-placeholder {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, var(--blush) 0%, rgba(217, 167, 178, 0.2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      border-bottom: 2px dashed rgba(217, 167, 178, 0.4);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-category {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--rose);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.6rem;
+      color: var(--dark);
+    }
+
+    .project-desc {
+      color: var(--grey);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-link {
+      font-size: 0.85rem;
+      color: var(--rose);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover {
+      gap: 0.6rem;
+    }
+
+    /* ✏️ REPLACE project info below in the HTML with your own projects */
+
+    .project-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card-link .project-card {
+      cursor: pointer;
+    }
+
+    /* ============================================
+       CONTACT SECTION
+       ============================================ */
+    #contact {
+      background: var(--dark);
+      color: var(--white);
+      padding: 6rem 5%;
+      text-align: center;
+    }
+
+    #contact .section-label {
+      color: var(--rose);
+    }
+
+    #contact .section-title {
+      color: var(--white);
+    }
+
+    .contact-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-block;
+      padding: 0.75rem 1.8rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-link.primary {
+      background: var(--rose);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(217, 167, 178, 0.3);
+    }
+
+    .contact-link.secondary {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--white);
+    }
+
+    .contact-link:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ✏️ REPLACE email and social links below with your own */
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      text-align: center;
+      padding: 1.5rem 5%;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 0.8rem;
+    }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVIGATION
+       ✏️ Change "Your Name" to your name
+       ============================================ -->
+  <nav>
+    <div class="nav-logo">Lotte Aarts</div>
+    <ul class="nav-links">
+      <li><a href="#about">Over mij</a></li>
+      <li><a href="#projects">Projecten</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================
+       HERO SECTION
+       ✏️ Change the greeting, name, and description
+       ============================================ -->
+  <section id="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-content">
+      <span class="hero-tag">👋 Welkom bij mijn portfolio</span>
+      <h1><em>Lotte Aarts</em></h1>
+      <p class="hero-description">
+        Ik ben een student Communicatie en Multimedia Design die zich richt op mensgericht ontwerpen. Door onderzoek te
+        doen en me te verdiepen in doelgroepen ontwikkel ik concepten die inspelen op echte behoeften en problemen.
+      </p>
+      <a href="#projects" class="hero-cta">Zie mijn werk →</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       ABOUT SECTION
+       ✏️ Replace photo, bio text, and skills
+       ============================================ -->
+  <section id="about">
+    <div class="about-grid">
+
+      <div class="about-image-box">
+        <!-- OPTION A: Use a real photo -->
+        <!-- <img src="your-photo.jpg" alt="Photo of Your Name"> -->
+        <img src="img/in pak.jpg" alt="Photo of Lotte Aarts">
+
+      </div>
+
+      <div class="about-text">
+        <p class="section-label">Over mij</p>
+        <h2 class="section-title">Een beetje over mezelf</h2>
+
+        <!-- ✏️ Replace with your own bio -->
+        <p>
+          Ik ben Lotte Aarts, 19 jaar, en ik studeer Communicatie en Multimedia Design aan Avans Hogeschool in Breda.
+          Momenteel zit ik in mijn tweede jaar. Daarvoor heb ik mijn HAVO-diploma
+          behaald op de Katholieke Scholengemeenschap in Etten-Leur.
+        </p>
+
+        <p>
+          Binnen mijn studie houd ik me bezig met het ontwerpen van oplossingen die aansluiten bij de behoeften van
+          gebruikers. Ik vind het interessant om doelgroepen te onderzoeken, hun perspectief te begrijpen en deze
+          inzichten te vertalen naar concepten en ontwerpen. Daarnaast heb ik een interesse in branding en het
+          ontwikkelen van een sterke identiteit voor bedrijven.
+        </p>
+        <p>
+          Op dit moment volg ik de keuzemodule Impactmakers in de zorg, waarin ik in een interdisciplinair team werk aan
+          een zorginnovatie voor het bedrijf Mijzo. Ik vind het bijzonder om samen ideeën te ontwikkelen en een
+          innovatie
+          te creëren die echt aansluit bij de doelgroep.
+        </p>
+
+        <!-- ✏️ Replace the skill tags with your own skills -->
+        <div class="skills-list">
+          <span class="skill-tag">Creatief</span>
+          <span class="skill-tag">Ondernemend</span>
+          <span class="skill-tag">Sociaal</span>
+          <span class="skill-tag">Nieuwsgierig</span>
+          <span class="skill-tag">Nauwkeurig</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       PROJECTS SECTION
+       ✏️ Replace each project card with your own work
+       Add more cards by copying one <div class="project-card"> block
+       ============================================ -->
+  <section id="projects">
+    <div class="projects-header">
+      <p class="section-label">Mijn werk</p>
+      <h2 class="section-title">Projecten</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- PROJECT CARD 1 -->
+      <!-- ✏️ Change href to the filename of your project page, e.g. "project-branding.html" -->
+      <a href="dagplanner.html" class="project-card-link">
+        <div class="project-card">
+          <!-- ✏️ OPTION A: Use a real image → replace the placeholder div below with:
+               <img class="project-image" src="project1.jpg" alt="Project One"> -->
+          <img class="project-image" src="img/Voorkant dagplanner.JPG" alt="Project One">
+
+          <div class="project-body">
+            <!-- ✏️ Replace with your category, title and description -->
+            <p class="project-category">Collectief 3</p>
+            <h3 class="project-title">Dagplanner</h3>
+            <p class="project-desc">
+              Dit is de dagplanner, ontworpen voor mensen met dementie. Ik heb hier in een team het concept bedacht en
+              ontworpen.
+            </p>
+            <span class="project-link">Bekijk project →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- PROJECT CARD 2 -->
+      <!-- ✏️ Change href to the filename of your project page -->
+      <a href="jamland.html" class="project-card-link">
+        <div class="project-card">
+          <img class="project-image" src="img/Mockup Flyer goede.png" alt="Project Two">
+          <div class="project-body">
+            <p class="project-category">Media Design 2</p>
+            <h3 class="project-title">Jam Land</h3>
+            <p class="project-desc">
+              Een zelf verzonnen muzieksevenement waarvoor ik een complete visuele identiteit heb ontworpen, inclusief
+              typografie, kleur en illustraties.
+            </p>
+            <span class="project-link">Bekijk project →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- PROJECT CARD 3 -->
+      <!-- ✏️ Change href to the filename of your project page -->
+      <a href="tranqcasa.html" class="project-card-link">
+        <div class="project-card">
+          <img class="project-image" src="img/Tranqcasa.jpg" alt="Project Two">
+
+          <div class="project-body">
+            <p class="project-category">Collectief 5</p>
+            <h3 class="project-title">TranqCasa</h3>
+            <p class="project-desc">
+              Een concept voor een ontmoetingsruimte voor jongeren, ontwikkeld op basis van straatinterviews en
+              onderzoek voor opdrachtgever Muzus.
+            </p>
+            <span class="project-link">Bekijk project →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       CONTACT SECTION
+       ✏️ Replace email and links with your own
+       ============================================ -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Laten we samenwerken</h2>
+    <p class="contact-subtitle">Voel je vrij om contact met me op te nemen!</p>
+    <div class="contact-links">
+      <!-- ✏️ Replace with your email -->
+      <a href="mailto:lacp.aarts@student.avans.nl" class="contact-link primary">📩 Email me</a>
+
+      <!-- ✏️ Replace with your LinkedIn URL (or remove if not needed) -->
+      <a href="https://www.linkedin.com/in/lotteaarts1234/" class="contact-link secondary">LinkedIn</a>
+
+      <!-- ✏️ Replace with your Instagram URL (or remove if not needed) -->
+      <a href="https://www.instagram.com/lottea.x/" class="contact-link secondary">Instagram</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       FOOTER
+       ✏️ Change "Your Name" to your name
+       ============================================ -->
+  <footer>
+    © 2026 Lotte Aarts

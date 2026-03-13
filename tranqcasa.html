@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TranqCasa — Lotte Aarts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --rose: #D9A7B2;
+            --blush: #FFF0F3;
+            --grey: #757575;
+            --white: #FFFFFF;
+            --dark: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--blush);
+            color: var(--dark);
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(255, 240, 243, 0.88);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(217, 167, 178, 0.3);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--rose);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: var(--grey);
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            transition: color 0.2s, gap 0.2s;
+        }
+
+        .back-btn:hover {
+            color: var(--rose);
+            gap: 0.7rem;
+        }
+
+        /* HERO */
+        .project-hero {
+            margin-top: 64px;
+            padding: 5rem 5% 3.5rem;
+            background: var(--white);
+            border-bottom: 1px solid rgba(217, 167, 178, 0.2);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .project-hero-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .project-category-tag {
+            display: inline-block;
+            background: var(--blush);
+            color: var(--rose);
+            border: 1px solid rgba(217, 167, 178, 0.5);
+            font-size: 0.73rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 1.2rem;
+        }
+
+        .project-hero h1 em {
+            font-style: italic;
+            color: var(--rose);
+        }
+
+        .project-intro {
+            font-size: 1.05rem;
+            color: var(--grey);
+            line-height: 1.75;
+            max-width: 640px;
+            margin-bottom: 2rem;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(217, 167, 178, 0.25);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .meta-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--rose);
+            font-weight: 500;
+        }
+
+        .meta-value {
+            font-size: 0.92rem;
+            color: var(--dark);
+            font-weight: 400;
+        }
+
+        /* CONTENT */
+        .project-content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+            animation: fadeUp 0.8s 0.1s ease both;
+        }
+
+        .project-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            color: var(--dark);
+            margin-bottom: 1rem;
+            margin-top: 3rem;
+        }
+
+        .project-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .project-content p {
+            color: var(--grey);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1.1rem;
+        }
+
+        /* IMAGES */
+        .img-full {
+            width: 100%;
+            border-radius: 1.2rem;
+            display: block;
+            object-fit: cover;
+            margin: 2rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .img-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--blush) 0%, rgba(217, 167, 178, 0.25) 100%);
+            border-radius: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.95rem;
+            border: 2px dashed rgba(217, 167, 178, 0.5);
+            margin: 2rem 0;
+        }
+
+        .img-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .img-row img,
+        .img-row .img-placeholder {
+            margin: 0;
+            aspect-ratio: 4/3;
+        }
+
+        .img-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .img-row-3 img,
+        .img-row-3 .img-placeholder {
+            margin: 0;
+            aspect-ratio: 1/1;
+        }
+
+        .img-caption {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--rose);
+            font-style: italic;
+            margin-top: -1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* HIGHLIGHT */
+        .highlight-block {
+            background: var(--white);
+            border-left: 3px solid var(--rose);
+            border-radius: 0 1rem 1rem 0;
+            padding: 1.4rem 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-block p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* TAGS */
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.5rem 0 2rem;
+        }
+
+        .tag {
+            background: var(--blush);
+            color: var(--dark);
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            border: 1px solid rgba(217, 167, 178, 0.4);
+        }
+
+        /* VIDEO LINK */
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--rose);
+            color: var(--white);
+            padding: 0.75rem 1.6rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin: 1rem 0 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px rgba(217, 167, 178, 0.4);
+        }
+
+        .video-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 167, 178, 0.55);
+        }
+
+        /* BOTTOM NAV */
+        .project-nav {
+            background: var(--white);
+            border-top: 1px solid rgba(217, 167, 178, 0.2);
+            padding: 2.5rem 5%;
+        }
+
+        .project-nav-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .project-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--grey);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .project-nav a:hover {
+            color: var(--rose);
+        }
+
+        .project-nav .back-home {
+            background: var(--rose);
+            color: var(--white);
+            padding: 0.7rem 1.6rem;
+            border-radius: 999px;
+            box-shadow: 0 4px 18px rgba(217, 167, 178, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-nav .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 167, 178, 0.5);
+            color: var(--white);
+        }
+
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            text-align: center;
+            padding: 1.5rem 5%;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.8rem;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .img-row {
+                grid-template-columns: 1fr;
+            }
+
+            .img-row-3 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .project-meta {
+                gap: 1.2rem;
+            }
+
+            .project-nav-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Lotte Aarts</a>
+        <a href="index.html" class="back-btn">
+            <span>←</span> Terug naar portfolio
+        </a>
+    </nav>
+
+    <header class="project-hero">
+        <div class="project-hero-inner">
+            <span class="project-category-tag">Collectief 5</span>
+            <h1><em>TranqCasa</em></h1>
+            <p class="project-intro">
+                TranqCasa is een concept voor een ruimte waar jongeren tussen de 12 en 18 jaar terechtkunnen om te
+                chillen, samen te spelen en deel te nemen aan workshops. Het idee is ontstaan vanuit onderzoek naar
+                telefoongebruik bij jongeren, en is ontwikkeld in samenwerking met opdrachtgever Muzus.
+            </p>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Jaar</span>
+                    <span class="meta-value">2025 </span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Mijn rol</span>
+                    <span class="meta-value">Ontwerper & onderzoeker</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">Floorplanner, AI, Adobe</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Opdrachtgever</span>
+                    <span class="meta-value">Muzus</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-content">
+
+        <!-- Hoofdafbeelding -->
+
+        <img class="img-full" src="img/Tranqcasa.jpg" alt="Omschrijving">
+        <!-- DE OPDRACHT -->
+        <h2>De opdracht</h2>
+        <p>
+            Voor Collectief 5 werkten we samen met Muzus, een Social Design bureau. De opdracht was om een oplossing te
+            bedenken voor overmatig telefoongebruik bij jongeren. Ik koos bewust voor dit bureau, omdat ik me steeds
+            meer aantrokken voel tot Social Design — ontwerpen voor en met mensen.
+        </p>
+        <p>
+            Om te begrijpen wat jongeren écht nodig hebben, ben ik het gesprek met hen aangegaan. Ik hield interviews op
+            straat in het centrum van Breda en verstuurde samen met een groepsgenoot een enquête naar jongeren tussen de
+            12 en 18 jaar.
+        </p>
+
+        <div class="highlight-block">
+            <p>"Hoe zorg je ervoor dat jongeren minder op hun telefoon zitten in hun vrije tijd?"</p>
+        </div>
+
+        <!-- ONDERZOEK -->
+        <h2>Onderzoek</h2>
+        <p>
+            Uit de enquête — met 10 respondenten — kwamen een aantal duidelijke inzichten naar voren: jongeren zitten
+            niet vaak op hun telefoon als ze met vrienden zijn, maar pakken hem wel uit verveling. Als ze bezig zijn met
+            een activiteit of workshop, hebben ze hun telefoon nauwelijks nodig. Daarnaast gaven jongeren aan dat ze
+            graag een plek zouden willen die vrolijk en comfortabel is, waar veel te doen valt.
+        </p>
+
+        <div class="img-row">
+            <div style="overflow:hidden; border-radius:1.2rem; aspect-ratio:4/3;">
+                <img src="img/Schermafbeelding 2025-11-02 212415.png" alt="Omschrijving"
+                    style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div style="overflow:hidden; border-radius:1.2rem; aspect-ratio:4/3;">
+                <img src="img/Schermafbeelding 2025-11-02 212319.png" alt="Omschrijving"
+                    style="width:100%; height:100%; object-fit:cover;">
+            </div>
+        </div>
+
+        <p class="img-caption">Onderzoek: enquête en straatinterviews in Breda</p>
+
+        <p>
+            Tijdens de interviews merkte ik dat het vragen stellen aan onbekenden spannend was, maar dat bijna iedereen
+            bereid was mee te werken. Per gesprek leerde ik welke vragen wel of niet relevant waren, en paste ik mijn
+            aanpak aan. Dit maakte de interviews steeds soepeler en waardevoller.
+        </p>
+
+        <!-- CONCEPT -->
+        <h2>Van YouthSpot naar TranqCasa</h2>
+        <p>
+            Mijn eerste idee heette YouthSpot — een centrale ruimte voor jongeren, aangevuld met een app en een bus
+            waarmee jongeren bedrijven konden bezoeken voor workshops. Ik presenteerde dit concept aan Muzus, die me
+            vroegen om me meer te focussen op de workshops zelf en te achterhalen welke workshops jongeren écht willen
+            doen.
+        </p>
+        <img class="img-full" src="img/Jongeren Youth Spot.png" alt="Omschrijving">
+
+
+        <p class="img-caption">Eerste conceptschets: YouthSpot</p>
+
+        <p>
+            Na aanvullend onderzoek bleek dat meiden enthousiast waren over cosmetische workshops, en jongens over
+            technische workshops zoals robotica. Samen met mijn groepje ontwikkelden we dit verder tot het uiteindelijke
+            concept: <strong>TranqCasa</strong>.
+        </p>
+
+        <div class="tag-row">
+            <span class="tag">Straatinterviews</span>
+            <span class="tag">Enquête</span>
+            <span class="tag">Conceptontwikkeling</span>
+            <span class="tag">Floorplanner</span>
+            <span class="tag">AI-visualisatie</span>
+        </div>
+
+        <!-- RESULTAAT -->
+        <h2>Het resultaat: TranqCasa</h2>
+        <p>
+            TranqCasa is een ruimte met twee zones: een chillruimte en een workshopruimte. In de chillruimte kunnen
+            jongeren ontspannen, kletsen en spellen spelen. In de workshopruimte vinden op vaste avonden workshops
+            plaats op het gebied van cosmetica, techniek, science en creatief. Zo is er voor ieder wat wils.
+        </p>
+        <p>
+            De indeling is ruim maar gezellig — en doordat jongeren altijd iets te doen hebben, pakken ze minder snel
+            hun telefoon.
+        </p>
+        <img class="img-full" src="img/Tranqcasa 2.jpg" alt="Omschrijving">
+
+        <p class="img-caption">Visualisatie van de TranqCasa ruimte, gemaakt in Floorplanner</p>
+
+        <div class="img-row-3">
+            <img class="img-full" src="img/Tranqcasa.jpg" alt="Omschrijving">
+
+            <img class="img-full" src="img/tranqcasa 3.jpg" alt="Omschrijving">
+            <img class="img-full" src="img/Schermafbeelding 2025-11-02 180103.png" alt="Omschrijving">
+
+        </div>
+        <p class="img-caption">Details van de ruimte-indeling</p>
+
+        <!-- VIDEO -->
+        <h2>De video</h2>
+        <p>
+            Samen met mijn groepje maakte ik een video over het gehele traject: van individuele ideeën en de
+            straatinterviews tot het eindconcept TranqCasa. De conclusietekst in de video heb ik zelf geschreven. De
+            video werd gepresenteerd tijdens een expositie voor het hele leerjaar, waar we veel positieve reacties op
+            kregen.
+        </p>
+
+        <div class="img-row">
+            <img class="img-full" src="img/Schermafbeelding 2025-11-02 175950.png" alt="Omschrijving">
+            <img class="img-full" src="img/Schermafbeelding 2025-11-02 223030.png" alt="Omschrijving">
+
+        </div>
+
+        <a href="https://youtu.be/RkHXrijEz6w" target="_blank" class="video-link">
+            ▶ Bekijk de video
+        </a>
+
+        <!-- REFLECTIE -->
+
+
+    </main>
+
+    <div class="project-nav">
+        <div class="project-nav-inner">
+            <a href="jamland.html">← Vorig project</a>
+            <a href="index.html" class="back-home">← Terug naar portfolio</a>
+            <span></span>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Lotte Aarts
+    </footer>
+
+</body>
+
+</html>
