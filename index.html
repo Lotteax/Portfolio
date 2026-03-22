@@ -92,6 +92,28 @@
       padding: 0 5%;
       position: relative;
       overflow: hidden;
+      background-image: url('img/foto\ voor\ in\ website\ bewerktt.png');
+      /* ✏️ Verander dit naar jouw foto */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Roze waas over de achtergrondafbeelding */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 220, 228, 0.85);
+      /* roze waas — pas de laatste waarde (0.75) aan voor meer/minder transparantie */
+      z-index: 0;
+    }
+
+    /* Zorg dat de inhoud boven de waas staat */
+    #hero .hero-blob,
+    #hero .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-blob {
@@ -143,6 +165,18 @@
       line-height: 1.7;
       margin-bottom: 2.5rem;
       max-width: 500px;
+    }
+
+    #hero h1 {
+      color: #FFFFFF;
+    }
+
+    #hero h1 em {
+      color: #FFFFFF;
+    }
+
+    #hero .hero-description {
+      color: rgba(255, 255, 255, 0.9);
     }
 
     /* ✏️ REPLACE with your name and role above */
@@ -495,8 +529,8 @@
       <span class="hero-tag">👋 Welkom bij mijn portfolio</span>
       <h1><em>Lotte Aarts</em></h1>
       <p class="hero-description">
-        Ik ben een student Communicatie en Multimedia Design die zich richt op mensgericht ontwerpen. Door onderzoek te
-        doen en me te verdiepen in doelgroepen ontwikkel ik concepten die inspelen op echte behoeften en problemen.
+        CMD Student | Concept
+        Development & Branding
       </p>
       <a href="#projects" class="hero-cta">Zie mijn werk →</a>
     </div>
@@ -638,7 +672,8 @@
     <p class="contact-subtitle">Voel je vrij om contact met me op te nemen!</p>
     <div class="contact-links">
       <!-- ✏️ Replace with your email -->
-      <a href="mailto:lacp.aarts@student.avans.nl" class="contact-link primary">📩 Email me</a>
+      <a href="/cdn-cgi/l/email-protection#3b575a584b155a5a494f487b484f4e5f5e554f155a4d5a5548155557"
+        class="contact-link primary">📩 Email me</a>
 
       <!-- ✏️ Replace with your LinkedIn URL (or remove if not needed) -->
       <a href="https://www.linkedin.com/in/lotteaarts1234/" class="contact-link secondary">LinkedIn</a>
@@ -652,6 +687,4 @@
   <!-- ============================================
        FOOTER
        ✏️ Change "Your Name" to your name
-       ============================================ -->
-  <footer>
-    © 2026 Lotte Aarts
+       ===================================
