@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projecten — Lotte Aarts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --rose: #D9A7B2;
+            --blush: #FFF0F3;
+            --grey: #757575;
+            --white: #FFFFFF;
+            --dark: #2a2a2a;
+            --border: rgba(217, 167, 178, 0.3);
+            --card-shadow: 0 2px 16px rgba(42, 42, 42, 0.06);
+            /* aliassen zodat de rest van de CSS blijft werken */
+            --warm-white: #FFFFFF;
+            --ink: #2a2a2a;
+            --muted: #757575;
+            --accent: #D9A7B2;
+            --accent-light: #FFF0F3;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--blush);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background: rgba(255, 240, 243, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(217, 167, 178, 0.3);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--rose);
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--grey);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--rose);
+        }
+
+        /* HEADER */
+        .page-header {
+            padding: 8rem 5% 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header .label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 0.8rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--dark);
+            margin-bottom: 1.25rem;
+        }
+
+        .page-header h1 em {
+            font-style: italic;
+            color: var(--rose);
+        }
+
+        .page-header p {
+            font-size: 1.05rem;
+            color: var(--grey);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        /* FILTER TABS */
+        .filter-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 2.5rem;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 1px solid rgba(217, 167, 178, 0.5);
+            border-radius: 100px;
+            padding: 0.4rem 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--grey);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--rose);
+            color: var(--rose);
+        }
+
+        .filter-btn.active {
+            background: var(--rose);
+            border-color: var(--rose);
+            color: white;
+        }
+
+        /* GRID */
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5% 6rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* PROJECT CARD */
+        .project-card {
+            background: var(--warm-white);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--card-shadow);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(217, 167, 178, 0.3);
+        }
+
+        .project-card:hover .card-arrow {
+            transform: translate(3px, -3px);
+        }
+
+        .card-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            background: var(--accent-light);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-tag {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.65;
+            flex: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .card-cta {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        .card-arrow {
+            font-size: 1rem;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        /* COMING SOON CARD */
+        .project-card.coming-soon {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .card-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placeholder-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px dashed var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: var(--accent);
+        }
+
+        /* BACK LINK */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            margin-bottom: 2.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--ink);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            text-align: center;
+            padding: 1.5rem 5%;
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 6rem 5% 2rem;
+            }
+
+            .filter-bar {
+                padding: 0 5% 2rem;
+            }
+
+            .projects-grid {
+                padding: 0 5% 4rem;
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Lottea</a>
+        <ul class="nav-links">
+            <li><a href="index.html#about">Over mij</a></li>
+            <li><a href="projecten.html" class="active">Projecten</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <p class="label">Mijn werk</p>
+        <h1>Alle <em>projecten</em></h1>
+        <p>Een overzicht van mijn werk in concept development, branding en communicatieontwerp.</p>
+    </div>
+
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterCards('all', this)">Alles</button>
+        <button class="filter-btn" onclick="filterCards('collectief', this)">Collectief</button>
+        <button class="filter-btn" onclick="filterCards('media', this)">Media Design</button>
+        <button class="filter-btn" onclick="filterCards('branding', this)">Branding</button>
+    </div>
+
+    <div class="projects-grid" id="grid">
+
+        <a href="dagplanner.html" class="project-card" data-category="collectief">
+            <img class="card-img" src="img/Voorkant dagplanner.JPG" alt="Dagplanner" loading="lazy">
+            <div class="card-body">
+                <p class="card-tag">Collectief 3</p>
+                <h2 class="card-title">Dagplanner</h2>
+                <p class="card-desc">Een fysieke planner ontworpen voor mensen met dementie, waarbij eigen regie
+                    centraal staat. Gemaakt in team via Design Thinking.</p>
+                <div class="card-footer">
+                    <span class="card-cta">Bekijk project</span>
+                    <span class="card-arrow">↗</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="jamland.html" class="project-card" data-category="media branding">
+            <img class="card-img" src="img/Mockup Flyer goede.png" alt="Jam Land" loading="lazy">
+            <div class="card-body">
+                <p class="card-tag">Media Design 2</p>
+                <h2 class="card-title">Jam Land</h2>
+                <p class="card-desc">Een zelf verzonnen muzieksevenement waarvoor ik een complete visuele identiteit
+                    ontwierp — typografie, kleur en illustraties.</p>
+                <div class="card-footer">
+                    <span class="card-cta">Bekijk project</span>
+                    <span class="card-arrow">↗</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="tranqcasa.html" class="project-card" data-category="collectief">
+            <img class="card-img" src="img/Tranqcasa.jpg" alt="TranqCasa" loading="lazy">
+            <div class="card-body">
+                <p class="card-tag">Collectief 5</p>
+                <h2 class="card-title">TranqCasa</h2>
+                <p class="card-desc">Een concept voor een ontmoetingsruimte voor jongeren, ontwikkeld op basis van
+                    straatinterviews en onderzoek voor Muzus.</p>
+                <div class="card-footer">
+                    <span class="card-cta">Bekijk project</span>
+                    <span class="card-arrow">↗</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Voeg hier nieuwe projecten toe! Kopieer een kaart hierboven en pas de gegevens aan. -->
+
+    </div>
+
+    <footer>© 2026 Lotte Aarts</footer>
+
+    <script>
+        function filterCards(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.project-card').forEach(card => {
+                const cats = card.dataset.category || '';
+                if (category === 'all' || cats.includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
